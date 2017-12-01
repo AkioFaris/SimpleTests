@@ -3,16 +3,15 @@ package jdiTestSite.simpleTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SimpleTest extends TestInitializer {
+public class SimpleTest extends JdiSiteInitializer {
 
 	@Test
 	public void verifyLoginAndContactSubmitting() {
-		String apiUrl = "https://jdi-framework.github.io/tests";
 		String firstName = "Stefani";
 		String lastName = "Nkodia";
 
 		/* Open test site by URL */
-		naigateToApiUrl(apiUrl);
+		naigateToApiUrl(jdiApi.url);
 
 		/* Assert Browser title */
 		Assert.assertEquals(getPageTitle(), homePage.title);

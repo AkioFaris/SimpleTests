@@ -9,7 +9,11 @@
 		<constructor-arg name="systemPropertyKey" value="webdriver.chrome.driver" />
 		<constructor-arg name="systemPropertyValue" value="chromedriver.exe" />
 	</bean>
-
+	
+	<bean id="jdiapi" class="jdiTestSite.beans.JdiApi">
+		<constructor-arg name="url" value="https://jdi-framework.github.io/tests" />
+	</bean>
+	
 	<bean id="homepage" class="jdiTestSite.beans.pageObjects.HomePageBean">
 		<property name="title" value="Index Page" />
 	</bean>
@@ -22,5 +26,9 @@
 		<constructor-arg name="login" value="epam" />
 		<constructor-arg name="password" value="1234" />
 		<constructor-arg name="name" value="Piter Chailovskii" />
+	</bean>
+	
+	<bean id="socialcmpapi" class="phpFrameworksCmp.beans.SocialcmpApi">
+		<constructor-arg name="url" value="https://socialcompare.com/en/comparison/php-frameworks-comparison" />
 	</bean>
 </beans>

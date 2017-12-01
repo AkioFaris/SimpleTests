@@ -16,7 +16,7 @@ public class ContactForm {
 	private WebElement submit;
 
 	public ContactForm(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+		PageFactory.initElements(driver, this);
 	}
 
 	public void submitFullName(String firstNameStr, String lastNameStr) {
