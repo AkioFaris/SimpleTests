@@ -1,4 +1,4 @@
-package beans;
+package jdiTestSite.beans;
 
 import org.openqa.selenium.WebDriver;
 

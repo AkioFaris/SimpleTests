@@ -1,4 +1,4 @@
-package beans;
+package jdiTestSite.beans;
 
 public class UserBean {
     public String login;

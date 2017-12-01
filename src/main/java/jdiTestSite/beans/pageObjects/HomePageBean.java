@@ -1,4 +1,4 @@
-package beans.pageObjects;
+package jdiTestSite.beans.pageObjects;
 
 
 public class HomePageBean {

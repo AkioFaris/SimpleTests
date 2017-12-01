@@ -3,22 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="webdriverbean" class="beans.WebDriverBean">
+	<bean id="webdriverbean" class="jdiTestSite.beans.WebDriverBean">
 		<constructor-arg name="driverClassName"
 			value="org.openqa.selenium.chrome.ChromeDriver" />
 		<constructor-arg name="systemPropertyKey" value="webdriver.chrome.driver" />
 		<constructor-arg name="systemPropertyValue" value="chromedriver.exe" />
 	</bean>
 
-	<bean id="homepage" class="beans.pageObjects.HomePageBean">
+	<bean id="homepage" class="jdiTestSite.beans.pageObjects.HomePageBean">
 		<property name="title" value="Index Page" />
 	</bean>
 
-	<bean id="contformpage" class="beans.pageObjects.ContactFormPageBean">
+	<bean id="contformpage" class="jdiTestSite.beans.pageObjects.ContactFormPageBean">
 		<property name="title" value="Contact Form" />
 	</bean>
 
-	<bean id="user" class="beans.UserBean">
+	<bean id="user" class="jdiTestSite.beans.UserBean">
 		<constructor-arg name="login" value="epam" />
 		<constructor-arg name="password" value="1234" />
 		<constructor-arg name="name" value="Piter Chailovskii" />

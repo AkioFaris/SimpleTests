@@ -1,4 +1,4 @@
-package simpleTest;
+package jdiTestSite.simpleTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;

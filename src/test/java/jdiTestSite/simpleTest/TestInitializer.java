@@ -1,4 +1,4 @@
-package simpleTest;
+package jdiTestSite.simpleTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,13 +7,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import beans.UserBean;
-import beans.WebDriverBean;
-import beans.pageObjects.ContactFormPageBean;
-import beans.pageObjects.HomePageBean;
-import pageObjects.ContactForm;
-import pageObjects.Header;
-import pageObjects.Log;
+import jdiTestSite.beans.UserBean;
+import jdiTestSite.beans.WebDriverBean;
+import jdiTestSite.beans.pageObjects.ContactFormPageBean;
+import jdiTestSite.beans.pageObjects.HomePageBean;
+import jdiTestSite.pageObjects.ContactForm;
+import jdiTestSite.pageObjects.Header;
+import jdiTestSite.pageObjects.Log;
 
 public class TestInitializer {
 	protected HomePageBean homePage;
@@ -28,7 +28,7 @@ public class TestInitializer {
 
 	@BeforeMethod
 	public void before() {
-		appCon = new ClassPathXmlApplicationContext("applicationContext.xml");
+		appCon = new ClassPathXmlApplicationContext("jdiTestSite/applicationContext.xml");
 		WebDriverBean driverFactory = (WebDriverBean) appCon.getBean("webdriverbean");
 		driver = driverFactory.getWebDriver();
 		System.setProperty(driverFactory.getSystemPropertyKey(), driverFactory.getSystemPropertyValue());
