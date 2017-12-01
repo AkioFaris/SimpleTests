@@ -1,41 +1,9 @@
 package simpleTest;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.WebDriver;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import beans.UserBean;
-import beans.WebDriverBean;
-import beans.pageObjects.ContactFormPageBean;
-import beans.pageObjects.HomePageBean;
-import pageObjects.ContactForm;
-import pageObjects.Header;
-import pageObjects.Log;
-
-public class SimpleTest {
-	private WebDriver driver;
-	private ClassPathXmlApplicationContext appCon;
-
-	@BeforeMethod
-	public void before() {
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		appCon = new ClassPathXmlApplicationContext("applicationContext.xml");
-		WebDriverBean driverFactory = (WebDriverBean) appCon.getBean("webdriverbean");
-		driver = driverFactory.getWebDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
-	}
-
-	@AfterMethod
-	public void after() {
-		appCon.close();
-		driver.close();
-	}
+public class SimpleTest extends TestInitializer {
 
 	@Test
 	public void verifyLoginAndContactSubmitting() {
@@ -43,19 +11,11 @@ public class SimpleTest {
 		String firstName = "Stefani";
 		String lastName = "Nkodia";
 
-		HomePageBean homePage = (HomePageBean) appCon.getBean("homepage");
-		ContactFormPageBean contactFormPage = (ContactFormPageBean) appCon.getBean("contformpage");
-		UserBean user = (UserBean) appCon.getBean("user");
-
-		Header header = new Header(driver);
-		ContactForm contactForm = new ContactForm(driver);
-		Log log = new Log(driver);
-
 		/* Open test site by URL */
-		driver.navigate().to(apiUrl);
+		naigateToApiUrl(apiUrl);
 
 		/* Assert Browser title */
-		Assert.assertEquals(driver.getTitle(), homePage.title);
+		Assert.assertEquals(getPageTitle(), homePage.title);
 
 		/* Perform login */
 		header.loginForm.login(user.login, user.password);
@@ -67,7 +27,7 @@ public class SimpleTest {
 		header.openContactFormPage();
 
 		/* Assert Browser title */
-		Assert.assertEquals(driver.getTitle(), contactFormPage.title);
+		Assert.assertEquals(getPageTitle(), contactFormPage.title);
 
 		/* Input first and last name in text fields and click submit button */
 		contactForm.submitFullName(firstName, lastName);
@@ -76,6 +36,6 @@ public class SimpleTest {
 		 * Assert that in the log section a new raw has displayed which contains text
 		 * "submit"
 		 */
-		log.verigyLogContains(("submit"));
+		log.verigyLogContains("submit");
 	}
 }
