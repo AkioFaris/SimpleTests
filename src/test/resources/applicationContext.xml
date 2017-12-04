@@ -28,7 +28,7 @@
 		<constructor-arg name="name" value="Piter Chailovskii" />
 	</bean>
 	
-	<bean id="socialcmpapi" class="phpFrameworksCmp.beans.SocialcmpApi">
-		<constructor-arg name="url" value="https://socialcompare.com/en/comparison/php-frameworks-comparison" />
+	<bean id="hotframeworskapi" class="frameworksCmp.beans.HotFrameworksApi">
+		<constructor-arg name="url" value="https://hotframeworks.com/" />
 	</bean>
 </beans>
