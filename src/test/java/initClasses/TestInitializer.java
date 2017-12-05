@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import jdiTestSite.beans.WebDriverBean;
+import utils.beans.WebDriverBean;
 
 public class TestInitializer {
 	protected WebDriver driver;
