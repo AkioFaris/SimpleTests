@@ -1,32 +1,36 @@
 package jdiTestSite.simpleTest;
 
-import org.testng.annotations.BeforeMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.testng.annotations.BeforeClass;
 
 import initClasses.TestInitializer;
-import jdiTestSite.beans.JdiApi;
-import jdiTestSite.beans.UserBean;
-import jdiTestSite.beans.pageObjects.ContactFormPageBean;
-import jdiTestSite.beans.pageObjects.HomePageBean;
+import jdiTestSite.User;
 import jdiTestSite.pageObjects.ContactForm;
 import jdiTestSite.pageObjects.Header;
 import jdiTestSite.pageObjects.Log;
+import utils.JdiTestSiteTestsConfig;
 
+@ContextConfiguration(classes = JdiTestSiteTestsConfig.class)
 public class JdiSiteInitializer extends TestInitializer {
-	protected JdiApi jdiApi;
-	protected HomePageBean homePage;
-	protected ContactFormPageBean contactFormPage;
-	protected UserBean user;
+	@Autowired
+	protected String jdiTestSiteUrl;
+
+	@Autowired
+	protected String homePageTitle;
+
+	@Autowired
+	protected String contactFormPageTitle;
+
+	@Autowired
+	protected User user;
+
 	protected Header header;
 	protected ContactForm contactForm;
 	protected Log log;
 
-	@BeforeMethod
+	@BeforeClass
 	public void beforeJdiSiteTest() {
-		jdiApi = (JdiApi) appCon.getBean("jdiapi");
-		homePage = (HomePageBean) appCon.getBean("homepage");
-		contactFormPage = (ContactFormPageBean) appCon.getBean("contformpage");
-		user = (UserBean) appCon.getBean("user");
-
 		header = new Header(driver);
 		contactForm = new ContactForm(driver);
 		log = new Log(driver);

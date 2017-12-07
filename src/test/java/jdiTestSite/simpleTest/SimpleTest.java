@@ -11,10 +11,10 @@ public class SimpleTest extends JdiSiteInitializer {
 		String lastName = "Nkodia";
 
 		/* Open test site by URL */
-		naigateToApiUrl(jdiApi.url);
+		naigateToApiUrl(jdiTestSiteUrl);
 
 		/* Assert Browser title */
-		Assert.assertEquals(getPageTitle(), homePage.title);
+		Assert.assertEquals(getPageTitle(), homePageTitle);
 
 		/* Perform login */
 		header.loginForm.login(user.login, user.password);
@@ -26,7 +26,7 @@ public class SimpleTest extends JdiSiteInitializer {
 		header.openContactFormPage();
 
 		/* Assert Browser title */
-		Assert.assertEquals(getPageTitle(), contactFormPage.title);
+		Assert.assertEquals(getPageTitle(), contactFormPageTitle);
 
 		/* Input first and last name in text fields and click submit button */
 		contactForm.submitFullName(firstName, lastName);

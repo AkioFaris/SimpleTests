@@ -1,20 +1,22 @@
 package frameworksCmp;
 
-import org.testng.annotations.BeforeMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.testng.annotations.BeforeClass;
 
-import frameworksCmp.beans.HotFrameworksApi;
 import frameworksCmp.pageObjects.Table;
 import initClasses.TestInitializer;
+import utils.HotFrameworksSiteTestsConfig;
 
+@ContextConfiguration(classes = HotFrameworksSiteTestsConfig.class)
 public class HotFrameworksSiteInitializer extends TestInitializer {
-	protected HotFrameworksApi hotFrameworksApi;
-	
+	@Autowired
+	protected String HotFrameworksUrl;
+
 	protected Table table;
 
-
-	@BeforeMethod
-	public void beforeJdiSiteTest() {
-		hotFrameworksApi = (HotFrameworksApi) appCon.getBean("hotframeworskapi");
+	@BeforeClass
+	public void beforeHotFrameworksSiteTest() {
 		table = new Table(driver);
 	}
 }

@@ -10,7 +10,7 @@ public class TableTest extends HotFrameworksSiteInitializer {
 	@BeforeMethod
 	public void beforeTest() {
 		/* Open test site by URL */
-		naigateToApiUrl(hotFrameworksApi.url);
+		naigateToApiUrl(HotFrameworksUrl);
 		
 		table.fillTblMap();
 	}

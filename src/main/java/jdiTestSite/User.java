@@ -1,11 +1,11 @@
-package jdiTestSite.beans;
+package jdiTestSite;
 
-public class UserBean {
+public class User {
 	public String login;
 	public String password;
 	public String name;
 
-	public UserBean(String login, String password, String name) {
+	public User(String login, String password, String name) {
 		this.login = login;
 		this.password = password;
 		this.name = name;

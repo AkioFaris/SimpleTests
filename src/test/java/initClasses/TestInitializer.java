@@ -3,30 +3,34 @@ package initClasses;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
-import utils.beans.WebDriverBean;
-
-public class TestInitializer {
+import utils.TestAppConfig;
+@ContextConfiguration(classes = {TestAppConfig.class})
+public class TestInitializer extends AbstractTestNGSpringContextTests {
+	@Autowired
 	protected WebDriver driver;
-	protected ClassPathXmlApplicationContext appCon;
+	
+	@Autowired
+	private String systemPropertyKey;
+	
+	@Autowired
+	private String systemPropertyValue;
 
-	@BeforeMethod
+	@BeforeClass
 	public void before() {
-		appCon = new ClassPathXmlApplicationContext("applicationContext.xml");
-		WebDriverBean driverFactory = (WebDriverBean) appCon.getBean("webdriverbean");
-		driver = driverFactory.getWebDriver();
-		System.setProperty(driverFactory.getSystemPropertyKey(), driverFactory.getSystemPropertyValue());
+		System.setProperty(systemPropertyKey, systemPropertyValue);
 
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 
-	@AfterMethod
+	@AfterClass
 	public void after() {
-		appCon.close();
 		driver.close();
 	}
 
