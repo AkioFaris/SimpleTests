@@ -1,7 +1,9 @@
-package jdiTestSite.simpleTest;
+package jdiTestSite;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import jdiTestSite.enums.ContFormElem;
 
 public class SimpleTest extends JdiSiteInitializer {
 
@@ -29,12 +31,12 @@ public class SimpleTest extends JdiSiteInitializer {
 		Assert.assertEquals(getPageTitle(), contactFormPageTitle);
 
 		/* Input first and last name in text fields and click submit button */
-		contactForm.submitFullName(firstName, lastName);
+		persInfoForm.submitFullName(firstName, lastName);
 
 		/*
 		 * Assert that in the log section a new raw has displayed which contains text
 		 * "submit"
 		 */
-		log.verigyLogContains("submit");
+		Assert.assertTrue(rightSect.logContains(ContFormElem.SUBMIT_LOG, "clicked"));
 	}
 }

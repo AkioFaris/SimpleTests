@@ -35,7 +35,7 @@ public class Table {
 		return (numOfMatches > 0);
 	}
 
-	public Boolean verifyColContainsValue(String colName, String value) {
+	public boolean verifyColContainsValue(String colName, String value) {
 		Map<String, String> column = tblMap.get(colName);
 		Long numOfMatches = new Long(0);
 		if (column != null)

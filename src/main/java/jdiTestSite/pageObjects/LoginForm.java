@@ -7,34 +7,53 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class LoginForm {
-	@FindBy(css = ".fa-user")
-	// @FindBy(xpath = "(//SPAN[@class='caret'])[2]")
+	@FindBy(xpath = "//div[@class='profile-photo']/following-sibling::span")
 	private WebElement caret;
 
-	@FindBy(css = "#Login")
+	@FindBy(xpath = "//input[@id='Login']")
 	private WebElement userLogin;
 
-	@FindBy(css = "#Password")
+	@FindBy(xpath = "//input[@id='Password']")
 	private WebElement password;
 
-	@FindBy(css = ".fa-sign-in")
-	private WebElement submit;
+	@FindBy(xpath = "//input[@id='Password']/ancestor::*/button")
+	private WebElement submitBtn;
 
-	@FindBy(css = ".profile-photo span")
+	@FindBy(xpath = "//span[contains(text(),'Logout')]/..")
+	private WebElement logoutBtn;
+
+	@FindBy(xpath = "//div[@class='profile-photo']/span")
 	private WebElement profile;
 
 	public LoginForm(WebDriver driver) {
 		PageFactory.initElements(driver, this);
+	}
+	
+	public boolean caretIsVisible() {
+		return caret.isDisplayed();
+	}
+	
+	public boolean elementsAreVisible() {
+		return caret.isDisplayed() && userLogin.isDisplayed() && password.isDisplayed() && submitBtn.isDisplayed();
+	}
+	
+	public boolean profileFullNameIsVisible() {
+		return profile.isDisplayed();
 	}
 
 	public void login(String user, String pass) {
 		caret.click();
 		userLogin.sendKeys(user);
 		password.sendKeys(pass);
-		submit.click();
+		submitBtn.click();
 	}
 
 	public void verifyUserName(String username) {
 		Assert.assertTrue(profile.getText().equalsIgnoreCase(username));
+	}
+	
+	public void logout() {
+		caret.click();
+		logoutBtn.click();
 	}
 }

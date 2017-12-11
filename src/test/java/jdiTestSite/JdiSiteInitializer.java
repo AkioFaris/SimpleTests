@@ -1,14 +1,14 @@
-package jdiTestSite.simpleTest;
+package jdiTestSite;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;
 
 import initClasses.TestInitializer;
-import jdiTestSite.User;
-import jdiTestSite.pageObjects.ContactForm;
+import jdiTestSite.pageObjects.EvenOddForm;
 import jdiTestSite.pageObjects.Header;
-import jdiTestSite.pageObjects.Log;
+import jdiTestSite.pageObjects.PersonalInfoForm;
+import jdiTestSite.pageObjects.RightSection;
 import utils.JdiTestSiteTestsConfig;
 
 @ContextConfiguration(classes = JdiTestSiteTestsConfig.class)
@@ -26,13 +26,15 @@ public class JdiSiteInitializer extends TestInitializer {
 	protected User user;
 
 	protected Header header;
-	protected ContactForm contactForm;
-	protected Log log;
+	protected PersonalInfoForm persInfoForm;
+	protected RightSection rightSect;
+	protected EvenOddForm evenOddForm;
 
 	@BeforeClass
 	public void beforeJdiSiteTest() {
 		header = new Header(driver);
-		contactForm = new ContactForm(driver);
-		log = new Log(driver);
+		persInfoForm = new PersonalInfoForm(driver);
+		rightSect = new RightSection(driver);
+		evenOddForm = new EvenOddForm(driver);
 	}
 }
