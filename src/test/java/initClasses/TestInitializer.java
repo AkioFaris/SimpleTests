@@ -6,14 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import utils.TestAppConfig;
 
 @ContextConfiguration(classes = { TestAppConfig.class })
 public class TestInitializer extends AbstractTestNGSpringContextTests {
-	@Autowired
+
 	protected WebDriver driver;
 
 	@Autowired
@@ -22,16 +22,32 @@ public class TestInitializer extends AbstractTestNGSpringContextTests {
 	@Autowired
 	private String systemPropertyValue;
 
-	@BeforeClass
+	@Autowired
+	private String driverClassName;
+
+	@BeforeMethod
 	public void before() {
+		if (driverClassName != null) {
+			Class<?> driverClass;
+			try {
+				driverClass = Class.forName(driverClassName);
+				driver = (WebDriver) driverClass.newInstance();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
 		System.setProperty(systemPropertyKey, systemPropertyValue);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
-	
-	@AfterClass
+
+	@AfterMethod
 	public void after() {
-		driver.close();
+		driver.quit();
 	}
 
 	protected void naigateToApiUrl(String apiUrl) {

@@ -25,10 +25,10 @@ public class EvenOddForm {
 	}
 	
 	public void fill(EvenNumb even, OddNumb odd) { 
-		WebElement evenRadio = evenNumbers.stream().filter(ev -> ev.getText().equals(even.number)).findAny().orElse(null);
+		WebElement evenRadio = evenNumbers.parallelStream().filter(ev -> ev.getText().equals(even.number)).findAny().orElse(null);
 		if (evenRadio != null)
 			evenRadio.click();
-		WebElement oddRadio = oddNumbers.stream().filter(od -> od.getText().equals(odd.number)).findAny().orElse(null);
+		WebElement oddRadio = oddNumbers.parallelStream().filter(od -> od.getText().equals(odd.number)).findAny().orElse(null);
 		if (oddRadio != null)
 			oddRadio.click();
 		calcBtn.click();

@@ -2,7 +2,7 @@ package jdiTestSite;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import initClasses.TestInitializer;
 import jdiTestSite.pageObjects.EvenOddForm;
@@ -30,7 +30,7 @@ public class JdiSiteInitializer extends TestInitializer {
 	protected RightSection rightSect;
 	protected EvenOddForm evenOddForm;
 
-	@BeforeClass
+	@BeforeMethod
 	public void beforeJdiSiteTest() {
 		header = new Header(driver);
 		persInfoForm = new PersonalInfoForm(driver);

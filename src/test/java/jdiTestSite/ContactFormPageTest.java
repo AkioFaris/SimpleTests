@@ -38,7 +38,7 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 
 		Assert.assertTrue(persInfoForm.elementsAreVisible());
 	}
-	
+
 	@AfterMethod
 	public void afterTest() {
 		header.loginForm.logout();
