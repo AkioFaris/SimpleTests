@@ -8,37 +8,25 @@ import org.testng.Assert;
 
 public class LoginForm {
 	@FindBy(xpath = "//div[@class='profile-photo']/following-sibling::span")
-	private WebElement caret;
+	public WebElement caret;
 
 	@FindBy(xpath = "//input[@id='Login']")
-	private WebElement userLogin;
+	public WebElement userLogin;
 
 	@FindBy(xpath = "//input[@id='Password']")
-	private WebElement password;
+	public WebElement password;
 
 	@FindBy(xpath = "//input[@id='Password']/ancestor::*/button")
-	private WebElement submitBtn;
+	public WebElement submitBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Logout')]/..")
-	private WebElement logoutBtn;
+	public WebElement logoutBtn;
 
 	@FindBy(xpath = "//div[@class='profile-photo']/span")
-	private WebElement profile;
+	public WebElement profile;
 
-	public LoginForm(WebDriver driver) {
+	LoginForm(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-	}
-	
-	public boolean caretIsVisible() {
-		return caret.isDisplayed();
-	}
-	
-	public boolean elementsAreVisible() {
-		return caret.isDisplayed() && userLogin.isDisplayed() && password.isDisplayed() && submitBtn.isDisplayed();
-	}
-	
-	public boolean profileFullNameIsVisible() {
-		return profile.isDisplayed();
 	}
 
 	public void login(String user, String pass) {

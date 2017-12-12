@@ -3,8 +3,6 @@ package utils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jdiTestSite.User;
-
 @Configuration
 public class JdiTestSiteTestsConfig {
 
@@ -21,13 +19,5 @@ public class JdiTestSiteTestsConfig {
 	@Bean
 	public String contactFormPageTitle() {
 		return "Contact Form";
-	}
-
-	@Bean
-	public User user() {
-		String login = "epam";
-		String password = "1234";
-		String name = "Piter Chailovskii";
-		return new User(login, password, name);
 	}
 }

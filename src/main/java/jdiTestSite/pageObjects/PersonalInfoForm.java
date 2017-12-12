@@ -7,23 +7,19 @@ import org.openqa.selenium.support.PageFactory;
 
 public class PersonalInfoForm {
 	@FindBy(xpath = "//*[@id='Name']")
-	private WebElement name;
+	public WebElement name;
 
 	@FindBy(xpath = ".//*[@id='LastName']")
-	private WebElement lastName;
+	public WebElement lastName;
 
-	@FindBy(xpath = ".//*[@id='Description']") 
-	private WebElement descr;
+	@FindBy(xpath = ".//*[@id='Description']")
+	public WebElement descr;
 
 	@FindBy(xpath = "//button[contains(text(),'Submit')]")
-	private WebElement submitBtn;
+	public WebElement submitBtn;
 
 	public PersonalInfoForm(WebDriver driver) {
 		PageFactory.initElements(driver, this);
-	}
-	
-	public boolean elementsAreVisible() {
-		return name.isDisplayed() && lastName.isDisplayed() && descr.isDisplayed() && submitBtn.isDisplayed();
 	}
 
 	public void submitFullName(String firstNameStr, String lastNameStr) {

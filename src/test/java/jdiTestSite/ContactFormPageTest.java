@@ -1,11 +1,5 @@
 package jdiTestSite;
 
-import static jdiTestSite.enums.ContFormElem.DESCRIPT;
-import static jdiTestSite.enums.ContFormElem.LASTNAME_LOG;
-import static jdiTestSite.enums.ContFormElem.LASTNAME_RES;
-import static jdiTestSite.enums.ContFormElem.NAME;
-import static jdiTestSite.enums.ContFormElem.SUBMIT_LOG;
-import static jdiTestSite.enums.ContFormElem.SUMMARY;
 import static jdiTestSite.enums.EvenNumb.EIGHT;
 import static jdiTestSite.enums.EvenNumb.TWO;
 import static jdiTestSite.enums.OddNumb.FIVE;
@@ -26,17 +20,18 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		/* Open test site by URL */
 		naigateToApiUrl(jdiTestSiteUrl);
 
-		Assert.assertTrue(header.loginForm.caretIsVisible());
+		Assert.assertTrue(header.loginForm.caret.isDisplayed());
 
 		/* Perform login */
-		header.loginForm.login(user.login, user.password);
+		header.loginForm.login(userLogin, userPass);
 
-		Assert.assertTrue(header.elementsAreVisible());
+		Assert.assertTrue(header.contactFormBtn.isDisplayed());
 
 		/* Open Contact form */
 		header.openContactFormPage();
 
-		Assert.assertTrue(persInfoForm.elementsAreVisible());
+		Assert.assertTrue(rightSect.logPanel.isDisplayed());
+		Assert.assertTrue(rightSect.resultPanel.isDisplayed());
 	}
 
 	@AfterMethod
@@ -50,7 +45,10 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		String lastName = "Yoshimoto";
 		String descr = "Also known as Banana Yoshimoto";
 
-		Assert.assertTrue(persInfoForm.elementsAreVisible());
+		Assert.assertTrue(persInfoForm.name.isDisplayed());
+		Assert.assertTrue(persInfoForm.lastName.isDisplayed());
+		Assert.assertTrue(persInfoForm.descr.isDisplayed());
+		Assert.assertTrue(persInfoForm.submitBtn.isDisplayed());
 
 		/*
 		 * Input first, last name and description in text fields without clicking the
@@ -58,17 +56,17 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		 */
 		persInfoForm.fill(firstName, lastName, descr);
 
-		Assert.assertTrue(rightSect.logContains(NAME, firstName));
-		Assert.assertTrue(rightSect.logContains(LASTNAME_LOG, lastName));
-		Assert.assertTrue(rightSect.logContains(driver, DESCRIPT, descr));
+		Assert.assertTrue(rightSect.logContains(contFormPage.name, firstName));
+		Assert.assertTrue(rightSect.logContains(contFormPage.lastNameLog, lastName));
+		Assert.assertTrue(rightSect.logContains(descr));
 
 		/* Input first, last name and description in text fields and click "submit" */
 		persInfoForm.submit(firstName, lastName, descr);
 
-		Assert.assertTrue(rightSect.logContains(SUBMIT_LOG, "clicked"));
-		Assert.assertTrue(rightSect.resultContains(driver, NAME, firstName));
-		Assert.assertTrue(rightSect.resultContains(LASTNAME_RES, lastName));
-		Assert.assertTrue(rightSect.resultContains(DESCRIPT, descr));
+		Assert.assertTrue(rightSect.logContains(contFormPage.submitLog, "clicked"));
+		Assert.assertTrue(rightSect.resultContains(firstName));
+		Assert.assertTrue(rightSect.resultContains(contFormPage.lastNameRes, lastName));
+		Assert.assertTrue(rightSect.resultContains(contFormPage.descript, descr));
 	}
 
 	@Test
@@ -80,13 +78,13 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		/* Select even and odd numbers radio buttons */
 		evenOddForm.fill(TWO, FIVE);
 
-		Assert.assertTrue(rightSect.logContains(driver, SUMMARY, TWO.number));
-		Assert.assertTrue(rightSect.logContains(SUMMARY, FIVE.number));
+		Assert.assertTrue(rightSect.logContains(TWO.number));
+		Assert.assertTrue(rightSect.logContains(contFormPage.summary, FIVE.number));
 
 		/* Select even and odd numbers radio buttons and click "calculate" */
 		evenOddForm.submit(even, odd);
 
-		Assert.assertTrue(rightSect.logContains(SUBMIT_LOG, "clicked"));
-		Assert.assertTrue(rightSect.resultContains(SUMMARY, sum.toString()));
+		Assert.assertTrue(rightSect.logContains(contFormPage.submitLog, "clicked"));
+		Assert.assertTrue(rightSect.resultContains(contFormPage.summary, sum.toString()));
 	}
 }

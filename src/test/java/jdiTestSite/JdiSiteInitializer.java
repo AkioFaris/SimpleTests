@@ -1,10 +1,14 @@
 package jdiTestSite;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeMethod;
 
 import initClasses.TestInitializer;
+import jdiTestSite.pageObjects.ContFormPage;
 import jdiTestSite.pageObjects.EvenOddForm;
 import jdiTestSite.pageObjects.Header;
 import jdiTestSite.pageObjects.PersonalInfoForm;
@@ -12,7 +16,12 @@ import jdiTestSite.pageObjects.RightSection;
 import utils.JdiTestSiteTestsConfig;
 
 @ContextConfiguration(classes = JdiTestSiteTestsConfig.class)
+@Configuration
+@PropertySource("classpath:application.properties")
 public class JdiSiteInitializer extends TestInitializer {
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	protected String jdiTestSiteUrl;
 
@@ -22,13 +31,15 @@ public class JdiSiteInitializer extends TestInitializer {
 	@Autowired
 	protected String contactFormPageTitle;
 
-	@Autowired
-	protected User user;
-
 	protected Header header;
 	protected PersonalInfoForm persInfoForm;
 	protected RightSection rightSect;
 	protected EvenOddForm evenOddForm;
+	protected ContFormPage contFormPage;
+	protected String userLogin;
+	protected String userPass;
+	protected String userName;
+
 
 	@BeforeMethod
 	public void beforeJdiSiteTest() {
@@ -36,5 +47,9 @@ public class JdiSiteInitializer extends TestInitializer {
 		persInfoForm = new PersonalInfoForm(driver);
 		rightSect = new RightSection(driver);
 		evenOddForm = new EvenOddForm(driver);
+		contFormPage = new ContFormPage();
+		userLogin = env.getProperty("login");
+		userPass = env.getProperty("password");
+		userName = env.getProperty("name");
 	}
 }

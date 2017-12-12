@@ -7,20 +7,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class Header {
 	@FindBy(xpath = "//a[text()='Home']")
-	private WebElement homeBtn;
+	public WebElement homeBtn;
 	
 	@FindBy(xpath = "//a[text()='Contact form']")
-	private WebElement contactFormBtn;
+	public WebElement contactFormBtn;
 
 	public LoginForm loginForm;
 
 	public Header(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 		loginForm = new LoginForm(driver);
-	}
-
-	public boolean elementsAreVisible() {
-		return contactFormBtn.isDisplayed() && homeBtn.isDisplayed();
 	}
 
 	public void openContactFormPage() {
