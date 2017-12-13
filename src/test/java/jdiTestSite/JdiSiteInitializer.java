@@ -1,8 +1,6 @@
 package jdiTestSite;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeMethod;
@@ -16,8 +14,6 @@ import jdiTestSite.pageObjects.RightSection;
 import utils.JdiTestSiteTestsConfig;
 
 @ContextConfiguration(classes = JdiTestSiteTestsConfig.class)
-@Configuration
-@PropertySource("classpath:application.properties")
 public class JdiSiteInitializer extends TestInitializer {
 	@Autowired
 	private Environment env;
