@@ -3,11 +3,10 @@ package xml.parsing;
 import static utils.DomHandler.countTagOccurrences;
 import static utils.DomHandler.getTagTextByTagName;
 import static utils.DomHandler.getTagTextByXpath;
+import static utils.DomHandler.parseDocument;
 
 import java.io.IOException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
@@ -25,8 +24,7 @@ public class DomParsingTest {
 
 	@BeforeMethod
 	public void createDom() throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		document = documentBuilder.parse("src\\test\\resources\\document.xml");
+		document = parseDocument("src\\test\\resources\\document.xml");
 		Assert.assertNotNull(document, "The document was not parsed successfully: ");
 	}
 
@@ -35,7 +33,7 @@ public class DomParsingTest {
 		String tagName = "country";
 		String expectedText = "HONG_KONG";
 		String tagText = getTagTextByTagName(document, tagName);
-		Assert.assertEquals(tagText, expectedText, 
+		Assert.assertEquals(tagText, expectedText,
 				"The text of '" + tagName + "' tag isn't equal to " + expectedText + ": ");
 	}
 
@@ -43,7 +41,7 @@ public class DomParsingTest {
 	public void checkParagrapthTitle() throws XPathExpressionException {
 		String expectedText = "Section";
 		String titleText = getTagTextByXpath(document, "//paragraph[@id='593ASECT1']/title");
-		Assert.assertTrue(titleText.contains(expectedText), 
+		Assert.assertTrue(titleText.contains(expectedText),
 				"Paragraph title's text doesn't contain '" + expectedText + "': ");
 	}
 
