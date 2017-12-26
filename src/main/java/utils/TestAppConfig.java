@@ -11,22 +11,22 @@ public class TestAppConfig {
 	@Bean
 	public String driverClassName() {
 		// return "org.openqa.selenium.ie.InternetExplorerDriver";
-		return "org.openqa.selenium.firefox.FirefoxDriver";
-		// return "org.openqa.selenium.chrome.ChromeDriver";
+//		return "org.openqa.selenium.firefox.FirefoxDriver";
+		return "org.openqa.selenium.chrome.ChromeDriver";
 	}
 
 	@Bean
 	public String systemPropertyKey() {
 		// return "webdriver.ie.driver";
-		return "webdriver.gecko.driver";
-		// return "webdriver.chrome.driver";
+//	return "webdriver.gecko.driver";
+		 return "webdriver.chrome.driver";
 
 	}
 
 	@Bean
 	public String systemPropertyValue() {
 		// return "iedriverserver.exe";
-		return "geckodriver.exe";
-		// return "chromedriver.exe";
+	//	return "geckodriver.exe";
+		 return "chromedriver.exe";
 	}
 }

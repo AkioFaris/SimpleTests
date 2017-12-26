@@ -27,7 +27,7 @@ public class PersonalInfoForm {
 		lastName.sendKeys(lastNameStr);
 		submitBtn.click();
 	}
-	
+
 	public void fill(String firstNameStr, String lastNameStr, String descrStr) {
 		if (firstNameStr != null)
 			name.sendKeys(firstNameStr);
@@ -42,7 +42,11 @@ public class PersonalInfoForm {
 
 	public void submit(String firstNameStr, String lastNameStr, String descrStr) {
 		fill(firstNameStr, lastNameStr, descrStr);
-		submitBtn.click();
+		submit();
+	}
+
+	public void submit() {
+		submitBtn.submit();
 	}
 
 }

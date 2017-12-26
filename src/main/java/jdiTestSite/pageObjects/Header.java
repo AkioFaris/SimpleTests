@@ -11,6 +11,12 @@ public class Header {
 	
 	@FindBy(xpath = "//a[text()='Contact form']")
 	public WebElement contactFormBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Service')]")
+	public WebElement serviceBtn;
+	
+	@FindBy(xpath = "//a[text()='Dates']")
+	public WebElement datesBtn;
 
 	public LoginForm loginForm;
 
@@ -21,5 +27,10 @@ public class Header {
 
 	public void openContactFormPage() {
 		contactFormBtn.click();
+	}
+	
+	public void openDatesPage() {
+		serviceBtn.click();
+		datesBtn.click();
 	}
 }

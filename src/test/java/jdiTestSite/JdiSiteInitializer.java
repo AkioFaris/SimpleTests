@@ -12,6 +12,7 @@ import jdiTestSite.pageObjects.Header;
 import jdiTestSite.pageObjects.PersonalInfoForm;
 import jdiTestSite.pageObjects.RightSection;
 import utils.JdiTestSiteTestsConfig;
+import utils.WebPageHandler;
 
 @ContextConfiguration(classes = JdiTestSiteTestsConfig.class)
 public class JdiSiteInitializer extends TestInitializer {
@@ -36,9 +37,11 @@ public class JdiSiteInitializer extends TestInitializer {
 	protected String userPass;
 	protected String userName;
 
+	protected WebPageHandler pageHndl;
 
 	@BeforeMethod
 	public void beforeJdiSiteTest() {
+		pageHndl = new WebPageHandler(driver);
 		header = new Header(driver);
 		persInfoForm = new PersonalInfoForm(driver);
 		rightSect = new RightSection(driver);
