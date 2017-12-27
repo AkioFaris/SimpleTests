@@ -46,7 +46,7 @@ public class PersonalInfoForm {
 	}
 
 	public void submit() {
-		submitBtn.submit();
+		submitBtn.click();
 	}
 
 }

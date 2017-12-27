@@ -16,7 +16,6 @@ public class DatesPageTest extends JdiSiteInitializer {
 	public void testPreparation() {
 		/* Open test site by URL */
 		naigateToApiUrl(jdiTestSiteUrl);
-
 		Assert.assertTrue(header.loginForm.caret.isDisplayed());
 
 		/* Perform login */
@@ -26,12 +25,6 @@ public class DatesPageTest extends JdiSiteInitializer {
 
 		/* Open Dates page */
 		header.openDatesPage();
-				
-		// Doesn't work:
-		pageHndl.zoomOutByNumb(3);
-		
-		// Works, but stops further execution:
-		pageHndl.zoomOutByPct(75);
 
 		Assert.assertTrue(rightSect.logPanel.isDisplayed());
 		Assert.assertTrue(rightSect.resultPanel.isDisplayed());
@@ -40,7 +33,9 @@ public class DatesPageTest extends JdiSiteInitializer {
 	@Test
 	public void verifyInfoSubmitting() throws IOException, URISyntaxException {
 		String iPersInfoPath = "\\src\\test\\resources\\personal_info.txt";
-		String iPicPath = "\\src\\test\\resources\\avatar.jpg";
+		String imgPath = "\\src\\test\\resources\\yaeji.jpeg";
+		String imgFileName = "yaeji.jpeg";
+
 		List<String> personalInfo = readPersInfFromFile(iPersInfoPath);
 		Assert.assertTrue(personalInfo.size() >= 3);
 		String firstName = personalInfo.get(0);
@@ -57,17 +52,22 @@ public class DatesPageTest extends JdiSiteInitializer {
 
 		/* Fill the form with first name, last name and description */
 		persInfoForm.fill(firstName, lastName, descr);
+		
+		/* Upload an image*/
+		datesPage.uploadImg(imgPath);
 
 		/* Use waits to check that files information shows up in log field*/
 		Assert.assertTrue(rightSect.logContains(firstName));
 		Assert.assertTrue(rightSect.logContains(lastName));
 		Assert.assertTrue(rightSect.logContains(descr));
+		Assert.assertTrue(rightSect.logContains(imgFileName));
+
 				
 		/* Press submit */
-		persInfoForm.submit();
-		
-		/* Check the result: assert values for range 1 and range 2 and Name */
-		Assert.assertTrue(rightSect.resultContains(range2[0].toString()));
-		Assert.assertTrue(rightSect.resultContains(range2[1].toString()));
+//		persInfoForm.submit();
+//		
+//		/* Check the result: assert values for range 1 and range 2 and Name */
+//		Assert.assertTrue(rightSect.resultContains(range2[0].toString()));
+//		Assert.assertTrue(rightSect.resultContains(range2[1].toString()));
 	}
 }

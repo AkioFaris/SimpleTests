@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 
 import initClasses.TestInitializer;
 import jdiTestSite.pageObjects.ContFormPage;
+import jdiTestSite.pageObjects.DatesPage;
 import jdiTestSite.pageObjects.EvenOddForm;
 import jdiTestSite.pageObjects.Header;
 import jdiTestSite.pageObjects.PersonalInfoForm;
@@ -33,6 +34,7 @@ public class JdiSiteInitializer extends TestInitializer {
 	protected RightSection rightSect;
 	protected EvenOddForm evenOddForm;
 	protected ContFormPage contFormPage;
+	protected DatesPage datesPage;
 	protected String userLogin;
 	protected String userPass;
 	protected String userName;
@@ -47,6 +49,7 @@ public class JdiSiteInitializer extends TestInitializer {
 		rightSect = new RightSection(driver);
 		evenOddForm = new EvenOddForm(driver);
 		contFormPage = new ContFormPage();
+		datesPage = new DatesPage(driver);
 		userLogin = env.getProperty("login");
 		userPass = env.getProperty("password");
 		userName = env.getProperty("name");

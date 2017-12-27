@@ -10,10 +10,16 @@ import java.util.stream.Collectors;
 
 public class DataHandler {
 
+	private static String currentDirectory = System.getProperty("user.dir");
 	public static List<String> readPersInfFromFile(String iFilePath) throws IOException, URISyntaxException{
-		String currentDirectory = System.getProperty("user.dir");
 		Path path = Paths.get(currentDirectory + iFilePath);
 		return Files.lines(path).collect(Collectors.toList());
+	}
+	
+	public static void executeScript(String scriptLocalPath) throws IOException {
+//		Runtime.getRuntime().exec(currentDirectory + scriptLocalPath);
+		Runtime.getRuntime().exec("E:\\Projects\\Automated_testing\\work\\SimpleTests\\src\\test\\resources\\load_pic.exe");
+
 	}
 	
 }
