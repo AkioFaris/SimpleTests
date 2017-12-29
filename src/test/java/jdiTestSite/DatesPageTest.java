@@ -31,10 +31,11 @@ public class DatesPageTest extends JdiSiteInitializer {
 	}
 
 	@Test
-	public void verifyInfoSubmitting() throws IOException, URISyntaxException {
+	public void verifyInfoSubmitting() throws IOException, URISyntaxException, InterruptedException {
 		String iPersInfoPath = "\\src\\test\\resources\\personal_info.txt";
 		String imgPath = "\\src\\test\\resources\\yaeji.jpeg";
 		String imgFileName = "yaeji.jpeg";
+		String date = "12/04/2017";
 
 		List<String> personalInfo = readPersInfFromFile(iPersInfoPath);
 		Assert.assertTrue(personalInfo.size() >= 3);
@@ -49,6 +50,12 @@ public class DatesPageTest extends JdiSiteInitializer {
 		Assert.assertTrue(persInfoForm.lastName.isDisplayed());
 		Assert.assertTrue(persInfoForm.descr.isDisplayed());
 		Assert.assertTrue(persInfoForm.submitBtn.isDisplayed());
+		
+		/*Set some date in the past*/
+		datesPage.setDate(date);
+		
+		/*Set range1*/
+		datesPage.setRange1(range1[0], range1[1]);
 
 		/* Fill the form with first name, last name and description */
 		persInfoForm.fill(firstName, lastName, descr);

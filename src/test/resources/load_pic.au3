@@ -1,4 +1,8 @@
-WinActivate("File Upload")
-ControlFocus("File Upload","","Edit1")
-ControlSetText("File Upload","","Edit1","E:\Projects\Automated_testing\work\SimpleTests\src\test\resources\yaeji.jpeg")
-ControlClick("File Upload","","Button2")
+;ожидание пока окно станет активным
+Local $handle = WinWaitActive("[CLASS:#32770]", "");
+
+;заполнение поля диалога параметром, переданным из командной строки
+ControlSetText($handle, "", "Edit1", $CmdLine[1]);
+
+;ENTER - подтверждение (можно вместо этого нажать на кнопку)
+Send("{ENTER}");
