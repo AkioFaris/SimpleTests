@@ -43,7 +43,7 @@ public class DatesPageTest extends JdiSiteInitializer {
 		String lastName = personalInfo.get(1);
 		String descr = personalInfo.get(2);
 		Integer[] range1 = {60, 80};
-		Integer[] range2 = {20, 80};
+//		Integer[] range2 = {20, 80};
 		
 
 		Assert.assertTrue(persInfoForm.name.isDisplayed());
