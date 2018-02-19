@@ -15,6 +15,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+/* A facade for the DOM parser*/
+
 public class DomHandler {
 
 	public static Document parseDocument(String documentPath)

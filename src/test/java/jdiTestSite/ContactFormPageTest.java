@@ -1,15 +1,16 @@
 package jdiTestSite;
 
 import static jdiTestSite.enums.EvenNumb.EIGHT;
+import static jdiTestSite.enums.EvenNumb.FOUR;
 import static jdiTestSite.enums.EvenNumb.TWO;
-import static jdiTestSite.enums.OddNumb.FIVE;
-import static jdiTestSite.enums.OddNumb.THREE;
+import static jdiTestSite.enums.OddNumb.*;
 
 import java.awt.AWTException;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import jdiTestSite.enums.EvenNumb;
@@ -42,11 +43,18 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		header.loginForm.logout();
 	}
 
-	@Test
-	public void verifyPersonalInfoSubmitting() {
-		String firstName = "Mahoko";
-		String lastName = "Yoshimoto";
-		String descr = "Also known as Banana Yoshimoto";
+	@DataProvider(name = "personalData")
+	public Object[][] createPersonalData() {
+		return new Object[][] { 
+			{ "Mahoko", "Yoshimoto", "Also known as Banana Yoshimoto" },
+			{ "Ramile", "Gusev", "An artist" }, 
+			{ "Chachi", "Gonzales", "A dancer" },
+			{ "Cleo", "Fiji", "A girafe-programmew" }, 
+			{ "Cinamon", "Patchouli", "Vegan ice-cream maker" } };
+	}
+
+	@Test(groups = {"withDataProvider"}, dataProvider = "personalData")
+	public void verifyPersonalInfoSubmitting(String firstName, String lastName, String descr) {
 
 		Assert.assertTrue(persInfoForm.name.isDisplayed());
 		Assert.assertTrue(persInfoForm.lastName.isDisplayed());
@@ -72,17 +80,14 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		Assert.assertTrue(rightSect.resultContains(contFormPage.descript, descr));
 	}
 
-	@Test
-	public void verifyEvenOddSum() {
-		EvenNumb even = EIGHT;
-		OddNumb odd = THREE;
+	@DataProvider(name = "evenAndOddNumbers")
+	public Object[][] createEvenAndOddNumbers() {
+		return new Object[][] { { EIGHT, THREE }, { FOUR, ONE }, { TWO, SEVEN } };
+	}
+
+	@Test(groups = {"withDataProvider"}, dataProvider = "evenAndOddNumbers")
+	public void verifyEvenOddSum(EvenNumb even, OddNumb odd) {
 		Integer sum = even.addOdd(odd);
-
-		/* Select even and odd numbers radio buttons */
-		evenOddForm.fill(TWO, FIVE);
-
-		Assert.assertTrue(rightSect.logContains(TWO.number));
-		Assert.assertTrue(rightSect.logContains(contFormPage.summary, FIVE.number));
 
 		/* Select even and odd numbers radio buttons and click "calculate" */
 		evenOddForm.submit(even, odd);
@@ -90,11 +95,11 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		Assert.assertTrue(rightSect.logContains(contFormPage.submitLog, "clicked"));
 		Assert.assertTrue(rightSect.resultContains(contFormPage.summary, sum.toString()));
 	}
-	
+
 	@Test
-	public void fillContactWithKeypad() throws AWTException {
+	public void verifyFillingUsingKeyboard() throws AWTException {
 		String name = "Marissa";
-		
+
 		/* Enter a name in the Name field */
 		persInfoForm.name.sendKeys(name);
 		/* Go to the next field by pressing Tab */
@@ -107,7 +112,7 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		KeypadHandler.pressCopy();
 		/* Go to the next field by pressing Tab */
 		KeypadHandler.pressTab();
-		/* Paste selected name into the Description field by pressing ctrl + v*/
+		/* Paste selected name into the Description field by pressing ctrl + v */
 		KeypadHandler.pressPaste();
 
 		Assert.assertTrue(rightSect.logContains(contFormPage.name, name));
@@ -118,5 +123,13 @@ public class ContactFormPageTest extends JdiSiteInitializer {
 		Assert.assertTrue(rightSect.resultContains(name));
 		Assert.assertTrue(rightSect.resultContains(contFormPage.lastNameRes, name));
 		Assert.assertTrue(rightSect.resultContains(contFormPage.descript, name));
+	}
+
+	public void verifyEvenOddFilling() {
+		/* Select even and odd numbers radio buttons */
+		evenOddForm.fill(TWO, FIVE);
+
+		Assert.assertTrue(rightSect.logContains(TWO.number));
+		Assert.assertTrue(rightSect.logContains(contFormPage.summary, FIVE.number));
 	}
 }

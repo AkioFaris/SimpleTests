@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="DDT" verbose="1">
+	<test name="TestsWithDataProvider">
+		<groups>
+			<run>
+				<include name="withDataProvider" />
+			</run>
+		</groups>
+		<classes>
+			<class name="jdiTestSite.ContactFormPageTest" />
+		</classes>
+	</test>
+</suite>
